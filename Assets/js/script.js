@@ -1,4 +1,5 @@
 var currentDayEl = $('#currentDay');
+var saveButton = $('.saveBtn')
 var nineAm = $('#hour-9');
 var tenAm = $('#hour-10');
 var elevenAm = $('#hour-11');
@@ -8,6 +9,7 @@ var twoPm = $('#hour-14');
 var threePm = $('#hour-15');
 var fourPm = $('#hour-16');
 var fivePm = $('#hour-17');
+
 
 function displayDate() {
   var today = moment().format('dddd, MMM DD');
@@ -45,5 +47,11 @@ function checkTime() {
   }
 }
 checkTime();
+
+function saveTask() {
+  
+}
+
+saveButton.on("click", saveTask);
 
 setInterval(checkTime, 1000)
