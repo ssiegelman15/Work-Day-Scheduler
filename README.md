@@ -1,6 +1,6 @@
 # Work-Day-Scheduler-HW-WK5
 
-Homework project to create a functional work day scheduler using third party APIs.
+Homework project to create a functional work day scheduler using third party APIs (JQuery, BootStrap).
 
 # Link to Webpage
 
