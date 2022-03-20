@@ -9,7 +9,7 @@ var twoPm = $('#hour-14');
 var threePm = $('#hour-15');
 var fourPm = $('#hour-16');
 var fivePm = $('#hour-17');
-
+var timeBlock = $('.time-block');
 
 function displayDate() {
   var today = moment().format('dddd, MMM DD');
@@ -48,10 +48,20 @@ function checkTime() {
 }
 checkTime();
 
-function saveTask() {
-  localStorage.setItem("")
+function saveTask(event) {
+  event.preventDefault();
+
+  var btnClicked = $(event.target);
+  var taskSaved = btnClicked.parents('div').children('.description').val();
+  // console.log(taskSaved);
+
+  var parentId = btnClicked.parents('div').attr('id');
+  // console.log(parentId);
+  localStorage.removeItem(parentId);
+  
+  localStorage.setItem(parentId, taskSaved);
 }
 
-saveButton.on("click", saveTask);
+timeBlock.on("click", ".saveBtn", saveTask);
 
 setInterval(checkTime, 1000)
