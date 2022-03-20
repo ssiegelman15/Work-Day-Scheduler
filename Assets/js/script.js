@@ -11,16 +11,18 @@ var fourPm = $('#hour-16');
 var fivePm = $('#hour-17');
 var timeBlock = $('.time-block');
 
+var hoursInDay = [09, 10, 11, 12, 13, 14, 15, 16, 17];
+var timeRows = [nineAm, tenAm, elevenAm, twelveAm, onePm, twoPm, threePm, fourPm, fivePm];
+var timeClasses = ["hour-9", "hour-10", "hour-11","hour-12", "hour-13", "hour-14", "hour-15", "hour-16", "hour-17",]
+
 function displayDate() {
   var today = moment().format('dddd, MMM DD');
   currentDayEl.text(today);
 }
-displayDate();
 
 function checkTime() {
   var currentTime = moment().toObject().hours;
-  var hoursInDay = [09, 10, 11, 12, 13, 14, 15, 16, 17];
-  var timeRows = [nineAm, tenAm, elevenAm, twelveAm, onePm, twoPm, threePm, fourPm, fivePm];
+
   for (let i = 0; i <= 8; i++) {
     if (currentTime < hoursInDay[i]) {
       if (timeRows[i].children("textarea").hasClass("present")) {
@@ -28,37 +30,49 @@ function checkTime() {
       } else if (timeRows[i].children("textarea").hasClass("past")) {
         timeRows[i].children("textarea").removeClass("past")
       }
-      timeRows[i].children("textarea").addClass("future");  
+      timeRows[i].children("textarea").addClass("future");
     } else if (currentTime == hoursInDay[i]) {
       if (timeRows[i].children("textarea").hasClass("future")) {
         timeRows[i].children("textarea").removeClass("future")
       } else if (timeRows[i].children("textarea").hasClass("past")) {
         timeRows[i].children("textarea").removeClass("past")
       }
-      timeRows[i].children("textarea").addClass("present");  
+      timeRows[i].children("textarea").addClass("present");
     } else {
       if (timeRows[i].children("textarea").hasClass("present")) {
         timeRows[i].children("textarea").removeClass("present")
       } else if (timeRows[i].children("textarea").hasClass("future")) {
         timeRows[i].children("textarea").removeClass("future")
       }
-      timeRows[i].children("textarea").addClass("past");  
+      timeRows[i].children("textarea").addClass("past");
     }
   }
 }
-checkTime();
+
+function storedTasks() {
+  for (let i = 0; i <= 8; i++) {
+    if (typeof (localStorage.getItem(timeClasses[i])) != 'undefined') {
+      storedText = localStorage.getItem(timeClasses[i]);
+      timeRows[i].children('.description').text(storedText);
+    };
+  }
+}
+
+function init() {
+  displayDate();
+  checkTime();
+  storedTasks();
+}
+
+init()
 
 function saveTask(event) {
   event.preventDefault();
 
   var btnClicked = $(event.target);
   var taskSaved = btnClicked.parents('div').children('.description').val();
-  // console.log(taskSaved);
 
   var parentId = btnClicked.parents('div').attr('id');
-  // console.log(parentId);
-  localStorage.removeItem(parentId);
-  
   localStorage.setItem(parentId, taskSaved);
 }
 
