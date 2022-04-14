@@ -21,6 +21,10 @@ https://ssiegelman15.github.io/Work-Day-Scheduler-HW-WK5/
 - Google Fonts
 - Moment API
 
+# Contact Info
+
+If you would like to reach out, please contact me at ssiegelman15@gmail.com
+
 # License
 
 The MIT License (MIT)
